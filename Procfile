@@ -1,0 +1,1 @@
+web:unicorn taskmanager.wsgi --log-file-
