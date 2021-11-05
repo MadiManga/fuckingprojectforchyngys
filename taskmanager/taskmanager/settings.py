@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-
+import os.path
 from pathlib import Path
 
 
@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-64l3e7^ln9di2h0u_aq=o5anily!@7^^#67#vjgp66qf#jmwey
 # SECURITY WNG: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['https://mangacheck-animetesting.herokuapp.com','127.0.0.1']
+ALLOWED_HOSTS = ['managamagazin.herokuapp.com','127.0.0.1']
 
 
 # Application definition
@@ -50,6 +50,7 @@ CRISPY_TEMPLATE_PACK="bootstrap5"
 
 
 MIDDLEWARE = [
+    'whitenoise.middleware.WhiteNoiseMiddleware'
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -127,6 +128,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
+STATIC_ROOT=os.path.join((BASE_DIR,'staticfiles'))
 STATIC_URL = '/static/'
 
 # Default primary key field type
