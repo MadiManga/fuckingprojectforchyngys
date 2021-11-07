@@ -99,8 +99,8 @@ class CartProduct(models.Model):
         verbose_name_plural='Продукты корзины'
 
 class Cart(models.Model):
-    owner=models.ForeignKey('Customer',on_delete=models.CASCADE)
-    products=models.ManyToManyField(CartProduct,blank=True,null=True,related_name='related_cart')
+    owner=models.ForeignKey('Customer',on_delete=models.CASCADE,null=True)
+    products=models.ManyToManyField(CartProduct,blank=True,related_name='related_cart')
     total_products=models.IntegerField(default=0)
     final_price=models.DecimalField(max_digits=9,decimal_places=2,null=True,blank=True)
     in_order=models.BooleanField(default=False)

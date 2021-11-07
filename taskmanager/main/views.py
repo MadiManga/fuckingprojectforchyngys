@@ -8,6 +8,7 @@ from django.views.generic import DetailView,View
 from .forms import LoginForm,RegistrationForm
 from django.contrib.auth import authenticate,login
 from .mixins import CartMixin
+from django.contrib.auth.models import AnonymousUser
 
 def MainPage(request):
     mangas=Manga.objects.all()
@@ -17,11 +18,7 @@ def AboutUs(request):
     return render(request,"main/AboutUs.html")
 
 
-def Cart(request):
-    return render(request,"main/cart.html")
-
-
-class AlbumDetailView(views.generic.DetailView):
+class MangaDetailView(views.generic.DetailView):
     model=Manga
 
 
@@ -43,10 +40,12 @@ class LoginView(views.View):
             if user:
                 login(request,user)
                 return HttpResponseRedirect('/')
-            context={
-                'form':form
-            }
-            return render(request,'main/registration.html',context)
+        context={
+            'form':form
+        }
+        return render(request,'main/registration.html',context)
+
+
 
 class RegistrationView(views.View):
     def get(self,request,*args,**kwargs):

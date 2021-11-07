@@ -1,9 +1,10 @@
 from django import views
-
+from django.contrib.auth.models import AnonymousUser
 from .models import Cart,Customer
 
 class CartMixin(views.generic.detail.SingleObjectMixin,views.View):
     def dispatch(self, request, *args, **kwargs):
+        user = request.user if type(request.user) is not AnonymousUser else None
         if request.user.is_authenticated:
             customer=Customer.objects.filter(user=request.user).first()
             if not customer:
